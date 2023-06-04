@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './landing/landing.component';
-import { BuddyMatchComponent } from './buddy-match/buddy-match.component';
 
 const routes: Routes = [
-  { path: 'landing', component: LandingComponent },
-  { path: 'buddy-match', component: BuddyMatchComponent }
+  { path: 'landing', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule) },
+  { path: 'buddy-match', loadChildren: () => import('./buddy-match/buddy-match.module').then(m => m.BuddyMatchModule) }
 ];
 
 @NgModule({
