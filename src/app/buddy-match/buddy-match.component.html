@@ -1,10 +1,6 @@
 <div class="main-container flex flex-col h-screen">
-    <a
-        type="button"
-        routerLink="detail"
-        class="card items-start text-left bg-base-200 shadow-xl flex-1 mt-20 overflow-y-auto overflow-x-hidden">
-        <div class="absolute top-4 right-0 translate-x-8 bg-accent py-1 px-8 rotate-45">See more</div>
-        <div class="card-body">
+    <div class="card items-start text-left bg-base-200 shadow-xl flex-1 mt-20 overflow-y-auto">
+        <div class="flex-1 card-body">
             <div class="avatar">
                 <div class="w-12 rounded-full">
                     <img src="assets/images/user-placeholder.svg" />
@@ -23,7 +19,6 @@
                 </svg>                  
                 Studies Komedia
             </span>
-            <div class="divider flex-1"></div>
             <h3 class="font-bold sm:text-lg">Courses</h3>
             <div class="flex flex-wrap gap-1">
                 <div class="badge badge-neutral h-auto sm:text-base">Advanced Web Technologies</div>
@@ -37,7 +32,11 @@
                 <div class="badge badge-neutral h-auto sm:text-base">SPSS</div>
             </div>
         </div>
-    </a>
+        <div class="card-body flex-none w-full">
+            <div class="divider"></div>
+            <a routerLink="detail" class="btn btn-primary">See more</a>
+        </div>
+    </div>
     <div class="flex items-center justify-around py-8">
         <button type="button" class="btn btn-circle btn-error btn-lg">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-base-100">
