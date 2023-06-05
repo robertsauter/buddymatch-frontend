@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .main-container {
+        @apply max-w-5xl px-2 sm:px-4 mx-auto;
+    }
+}
