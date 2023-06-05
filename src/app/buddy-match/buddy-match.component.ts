@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-buddy-match',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./buddy-match.component.css']
 })
 export class BuddyMatchComponent {
-
+  @ViewChild('filtersModal') filtersModal!: HTMLDialogElement;
 }
