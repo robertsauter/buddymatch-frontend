@@ -2,32 +2,31 @@
     class="collapse collapse-plus"
     [ngClass]="isStudyFieldsOpen ? 'collapse-open' : 'collapse-close'"
 >
-    <div
-        class="collapse-title sm:text-lg"
+    <button
+        type="button"
+        class="collapse-title sm:text-lg text-left"
         (click)="isStudyFieldsOpen = !isStudyFieldsOpen"
     >
         Study fields
-    </div>
+    </button>
     <div class="collapse-content">
-        <label class="label">
-            <span class="label-text sm:text-base">Komedia</span>
-            <input type="checkbox" class="checkbox checkbox-accent" />
+        <label class="label" *ngFor="let option of filterOptions.studyFields">
+            <span class="label-text sm:text-base">{{ option.displayName }}</span>
+            <input type="checkbox" class="checkbox checkbox-accent" [name]="option.name" />
         </label>
-        <label class="label">
-            <span class="label-text sm:text-base">Informatik</span>
-            <input type="checkbox" class="checkbox checkbox-accent" />
-        </label>        </div>
+    </div>
 </div>
 <div
     class="collapse collapse-plus"
     [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'"
 >
-    <div
-        class="collapse-title sm:text-lg"
+    <button
+        type="button"
+        class="collapse-title sm:text-lg text-left"
         (click)="isStudyCoursesOpen = !isStudyCoursesOpen"
     >
         Study courses
-    </div>
+    </button>
     <div class="collapse-content">
         <label class="label">
             <span class="label-text sm:text-base">Advanced web technologies</span>
@@ -40,5 +39,5 @@
     </div>
 </div>
 <div class="modal-action">
-    <button class="btn btn-success sm:text-base">Save</button>
+    <button class="btn btn-accent sm:text-base">Save</button>
 </div>

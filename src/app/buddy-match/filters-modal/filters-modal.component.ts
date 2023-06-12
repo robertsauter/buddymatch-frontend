@@ -8,4 +8,17 @@ import { Component, Input } from '@angular/core';
 export class FiltersModalComponent {
   isStudyFieldsOpen = false;
   isStudyCoursesOpen = false;
+
+  filterOptions = {
+    studyFields: [
+      {
+        name: 'komedia',
+        displayName: 'Komedia',
+      },
+      {
+        name: 'info',
+        displayName: 'Informatik',
+      }
+    ]
+  };
 }
