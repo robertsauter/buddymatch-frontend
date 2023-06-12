@@ -6,4 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./filters-modal.component.css']
 })
 export class FiltersModalComponent {
+  isStudyFieldsOpen = false;
+  isStudyCoursesOpen = false;
 }
