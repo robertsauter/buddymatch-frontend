@@ -6,4 +6,19 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./filters-modal.component.css']
 })
 export class FiltersModalComponent {
+  isStudyFieldsOpen = false;
+  isStudyCoursesOpen = false;
+
+  filterOptions = {
+    studyFields: [
+      {
+        name: 'komedia',
+        displayName: 'Komedia',
+      },
+      {
+        name: 'info',
+        displayName: 'Informatik',
+      }
+    ]
+  };
 }

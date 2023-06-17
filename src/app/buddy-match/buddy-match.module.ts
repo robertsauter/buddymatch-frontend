@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { BuddyMatchRoutingModule } from './buddy-match-routing.module';
 import { DetailComponent } from './detail/detail.component';
 import { FiltersModalComponent } from './filters-modal/filters-modal.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { FiltersModalComponent } from './filters-modal/filters-modal.component';
   declarations: [BuddyMatchComponent, LoginComponent, DetailComponent, FiltersModalComponent],
   imports: [
     CommonModule,
-    BuddyMatchRoutingModule
+    BuddyMatchRoutingModule,
+    FormsModule
   ]
 })
 export class BuddyMatchModule { }

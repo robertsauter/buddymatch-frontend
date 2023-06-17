@@ -1,6 +1,43 @@
-<div class="modal-box">
-    <p>Show some filters here!</p>
-    <div class="modal-action">
-        <button class="btn btn-success">Save</button>
+<div
+    class="collapse collapse-plus"
+    [ngClass]="isStudyFieldsOpen ? 'collapse-open' : 'collapse-close'"
+>
+    <button
+        type="button"
+        class="collapse-title sm:text-lg text-left"
+        (click)="isStudyFieldsOpen = !isStudyFieldsOpen"
+    >
+        Study fields
+    </button>
+    <div class="collapse-content">
+        <label class="label" *ngFor="let option of filterOptions.studyFields">
+            <span class="label-text sm:text-base">{{ option.displayName }}</span>
+            <input type="checkbox" class="checkbox checkbox-accent" [name]="option.name" />
+        </label>
     </div>
+</div>
+<div
+    class="collapse collapse-plus"
+    [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'"
+>
+    <button
+        type="button"
+        class="collapse-title sm:text-lg text-left"
+        (click)="isStudyCoursesOpen = !isStudyCoursesOpen"
+    >
+        Study courses
+    </button>
+    <div class="collapse-content">
+        <label class="label">
+            <span class="label-text sm:text-base">Advanced web technologies</span>
+            <input type="checkbox" class="checkbox checkbox-accent" />
+        </label>
+        <label class="label">
+            <span class="label-text sm:text-base">Intelligent learning environments</span>
+            <input type="checkbox" class="checkbox checkbox-accent" />
+        </label>
+    </div>
+</div>
+<div class="modal-action">
+    <button class="btn btn-accent sm:text-base">Save</button>
 </div>
