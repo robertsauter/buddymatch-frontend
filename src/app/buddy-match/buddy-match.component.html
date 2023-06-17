@@ -48,7 +48,7 @@
         <button type="button" class="btn btn-circle btn-error">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-base-100">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg> 
+            </svg>
         </button>
         <button type="button" class="btn btn-circle btn-success">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-base-100">
@@ -58,7 +58,12 @@
     </div>
 </div>
 <dialog class="modal" #filtersModal>
-    <form method="dialog" class="modal-box">
+    <form method="dialog" class="modal-box pt-16">
+        <button class="btn btn-square btn-ghost absolute top-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
         <app-filters-modal></app-filters-modal>
     </form>
 </dialog>
