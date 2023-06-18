@@ -18,7 +18,7 @@
         <a routerLink="/buddy-match" class="flex flex-col items-center mr-4">
             <div class="avatar placeholder">
                 <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-                    <span class="text-2xl">L</span>
+                    <span class="text-2xl">A</span>
                 </div>
             </div>
             <span>Arnold</span>
@@ -26,7 +26,7 @@
     </div>
     <span class="font-bold mb-4">Messages</span>
     <div>
-        <a class="flex mb-4">
+        <a class="flex mb-4" [routerLink]="['/buddy-match/chat', 'robert']">
             <div class="avatar placeholder mr-4">
                 <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
                     <span class="text-2xl">R</span>
@@ -37,10 +37,10 @@
                 <span>Moooooooooooooooooooooin</span>
             </div>
         </a>
-        <a class="flex mb-4">
+        <a class="flex mb-4" [routerLink]="['/buddy-match/chat', 'arnold']">
             <div class="avatar placeholder mr-4">
                 <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-                    <span class="text-2xl">L</span>
+                    <span class="text-2xl">A</span>
                 </div>
             </div>
             <div class="flex-1 flex flex-col justify-center">

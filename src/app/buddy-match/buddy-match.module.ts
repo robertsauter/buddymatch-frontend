@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { FiltersModalComponent } from './filters-modal/filters-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatchesComponent } from './matches/matches.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -16,7 +17,8 @@ import { MatchesComponent } from './matches/matches.component';
     LoginComponent,
     DetailComponent,
     FiltersModalComponent,
-    MatchesComponent
+    MatchesComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,

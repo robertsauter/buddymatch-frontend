@@ -4,12 +4,14 @@ import { BuddyMatchComponent } from './buddy-match.component';
 import { LoginComponent } from './login/login.component';
 import { DetailComponent } from './detail/detail.component';
 import { MatchesComponent } from './matches/matches.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: BuddyMatchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'detail', component: DetailComponent },
-  { path: 'matches', component: MatchesComponent }
+  { path: 'matches', component: MatchesComponent },
+  { path: 'chat/:userid', component: ChatComponent }
 ];
 
 @NgModule({
