@@ -8,6 +8,8 @@ import { FiltersModalComponent } from './filters-modal/filters-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatchesComponent } from './matches/matches.component';
 import { ChatComponent } from './chat/chat.component';
+import { SettingsComponent } from './settings/settings.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -18,7 +20,9 @@ import { ChatComponent } from './chat/chat.component';
     DetailComponent,
     FiltersModalComponent,
     MatchesComponent,
-    ChatComponent
+    ChatComponent,
+    SettingsComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
