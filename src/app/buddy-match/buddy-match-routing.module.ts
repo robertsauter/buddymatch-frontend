@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BuddyMatchComponent } from './buddy-match.component';
-import { LoginComponent } from './login/login.component';
-import { DetailComponent } from './detail/detail.component';
-import { MatchesComponent } from './matches/matches.component';
-import { ChatComponent } from './chat/chat.component';
-import { RegisterComponent } from './register/register.component';
-import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DetailComponent } from './pages/detail/detail.component';
+import { MatchesComponent } from './pages/matches/matches.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: BuddyMatchComponent },
