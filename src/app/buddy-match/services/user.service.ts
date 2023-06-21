@@ -6,4 +6,9 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   constructor() { }
+
+  getUserByEmail(email: string) {}
+
+  //Get all users, that match the given filter options. Should get the filters as input parameter
+  getUsers() {}
 }

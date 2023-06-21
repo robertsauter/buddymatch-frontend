@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { UserDetail } from '../interfaces/user-detail';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +8,10 @@ import { Injectable } from '@angular/core';
 export class AccountService {
 
   constructor() { }
+
+  login(username: string, password: string) {}
+
+  register(user: User) {}
+
+  updateProfile(user: UserDetail) {}
 }

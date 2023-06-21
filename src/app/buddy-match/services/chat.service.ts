@@ -6,4 +6,9 @@ import { Injectable } from '@angular/core';
 export class ChatService {
 
   constructor() { }
+
+  sendMessage(message: string) {}
+
+  //Get all messages for a single chat between two participants
+  getMessages() {}
 }
