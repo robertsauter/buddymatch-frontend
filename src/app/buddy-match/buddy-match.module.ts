@@ -11,8 +11,6 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { RegisterComponent } from './pages/register/register.component';
 
-
-
 @NgModule({
   declarations: [
     BuddyMatchComponent,
