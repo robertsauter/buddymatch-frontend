@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -21,4 +23,11 @@ export class SettingsComponent {
       }
     ]
   };
+
+  constructor(private accountService: AccountService, private router: Router) {}
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigate(['/buddy-match/login']);
+  }
 }

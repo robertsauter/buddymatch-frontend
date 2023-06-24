@@ -11,22 +11,34 @@ import { ResponseData } from '../interfaces/responseData';
 })
 export class AccountService {
 
-  isLoggedIn$!: BehaviorSubject<boolean>;
+  email!: string;
 
-  constructor(private http: HttpClient) {
-    this.isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  constructor(private http: HttpClient) {}
+
+  checkIfUserIsLoggedIn(): boolean {
+    const email = window.localStorage.getItem('email');
+    if(email) {
+      this.email = email;
+      return true;
+    }
+    return false;
   }
 
   login(email: string, password: string): Observable<ResponseData<null>> {
     return this.http.post<HttpResponse<null>>(`${environment.baseUrl}/login`, { email, password }).pipe(
-      map((response) => {
-        this.isLoggedIn$.next(true);
+      map(() => {
+        window.localStorage.setItem('email', email);
+        this.email = email;
         return { isSuccess: true };
       }),
-      catchError((error) => {
+      catchError(() => {
         return of({ isSuccess: false });
       })
     );
+  }
+
+  logout() {
+    window.localStorage.removeItem('email');
   }
 
   register(user: User) {}

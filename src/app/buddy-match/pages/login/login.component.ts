@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { ResponseData } from '../../interfaces/responseData';
 import { Router } from '@angular/router';
 
@@ -17,15 +17,14 @@ export class LoginComponent implements OnInit {
 
   constructor(private accountService: AccountService, private router: Router) {}
 
-  ngOnInit(): void {
-    this.accountService.isLoggedIn$.subscribe((isLoggedIn) => {
-      if(isLoggedIn) {
-        this.router.navigate(['/buddy-match']);
-      }
-    });
-  }
+  ngOnInit(): void {}
 
   tryLogin() {
     this.response$ = this.accountService.login(this.email, this.password);
+    this.response$.pipe(first()).subscribe((response) => {
+      if(response.isSuccess) {
+        this.router.navigate(['/buddy-match']);
+      }
+    });
   }
 }

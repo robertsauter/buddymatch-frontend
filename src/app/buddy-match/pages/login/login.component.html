@@ -1,5 +1,5 @@
-<div class="main-container pt-20">
-    <div class="card card-compact sm:card-normal my-4 sm:bg-base-200 sm:shadow-xl">
+<div class="main-container pt-20 pb-8">
+    <div class="card card-compact sm:card-normal mt-4 mb-8 sm:bg-base-200 sm:shadow-xl">
         <form class="card-body">
             <label>Username</label>
             <input
@@ -17,10 +17,14 @@
                 required
                 class="input input-bordered w-full mb-4"
             />
-            <button (click)="tryLogin()" class="btn btn-primary">Login</button>
+                <button (click)="tryLogin()" class="btn btn-primary">Login</button>
             <ng-container *ngIf="(response$ | async) as response">
                 <span *ngIf="!response.isSuccess" class="text-error text-sm">Email or password could not be found, please try again!</span>
             </ng-container>
         </form>
+    </div>
+    <div class="flex justify-end items-center">
+        <span class="mr-2">Don't have an account yet?</span>
+        <a routerLink="/buddy-match/register" class="btn btn-neutral">Register here!</a>
     </div>
 </div>

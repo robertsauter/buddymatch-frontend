@@ -7,15 +7,16 @@ import { MatchesComponent } from './pages/matches/matches.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { isLoggedInGuard, isNotLoggedInGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: BuddyMatchComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'detail', component: DetailComponent },
-  { path: 'matches', component: MatchesComponent },
-  { path: 'chat/:userid', component: ChatComponent }
+  { path: '', component: BuddyMatchComponent, canActivate: [isLoggedInGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [isNotLoggedInGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [isNotLoggedInGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [isLoggedInGuard] },
+  { path: 'detail', component: DetailComponent, canActivate: [isLoggedInGuard] },
+  { path: 'matches', component: MatchesComponent, canActivate: [isLoggedInGuard] },
+  { path: 'chat/:userid', component: ChatComponent, canActivate: [isLoggedInGuard] }
 ];
 
 @NgModule({
