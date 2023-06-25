@@ -1,56 +1,102 @@
 <div class="main-container pt-20 pb-8">
     <div class="card card-compact sm:card-normal mt-4 mb-8 sm:bg-base-200 sm:shadow-xl">
-        <div class="card-body">
-            <label>Username</label>
-            <input type="text" class="input input-bordered w-full mb-4" />
+        <form class="card-body">
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                [(ngModel)]="user.email"
+                class="input input-bordered w-full mb-4"
+            />
             <label>Password</label>
-            <input type="password" class="input input-bordered w-full mb-4" />
+            <input
+                type="password"
+                name="password"
+                [(ngModel)]="user.password"
+                class="input input-bordered w-full mb-4"
+            />
+            <label>First name</label>
+            <input
+                type="text"
+                name="firstname"
+                [(ngModel)]="user.detail.first_name"
+                class="input input-bordered w-full mb-4"
+            />
+            <label>Last name</label>
+            <input
+                type="text"
+                name="secondname"
+                [(ngModel)]="user.detail.second_name"
+                class="input input-bordered w-full mb-4"
+            />
+            <label>Study program</label>
+            <select name="studyprogram" [(ngModel)]="user.detail.study_program" class="select select-bordered w-full mb-4">
+                <option *ngFor="let program of studyPrograms" value="program.name">{{ program.displayName }}</option>
+            </select>
             <div
                 class="collapse collapse-plus mb-4"
-                [ngClass]="isStudyFieldsOpen ? 'collapse-open' : 'collapse-close'"
-            >
+                [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'">
                 <button
                     type="button"
                     class="collapse-title sm:text-lg text-left pl-0"
-                    (click)="isStudyFieldsOpen = !isStudyFieldsOpen"
-                >
-                    Study fields
+                    (click)="isStudyCoursesOpen = !isStudyCoursesOpen">
+                    Courses
                 </button>
                 <div class="collapse-content">
-                    <label class="label" *ngFor="let option of filterOptions.studyFields">
+                    <label class="label" *ngFor="let option of courses">
                         <span class="label-text sm:text-base">{{ option.displayName }}</span>
-                        <input type="checkbox" class="checkbox checkbox-accent" [name]="option.name" />
+                        <input
+                            type="checkbox"
+                            class="checkbox checkbox-accent"
+                            [name]="option.name"
+                            (input)="updateCourses($event)"
+                        />
                     </label>
                 </div>
             </div>
             <div
                 class="collapse collapse-plus mb-4"
-                [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'"
-            >
+                [ngClass]="isSkillsOpen ? 'collapse-open' : 'collapse-close'">
                 <button
                     type="button"
                     class="collapse-title sm:text-lg text-left pl-0"
-                    (click)="isStudyCoursesOpen = !isStudyCoursesOpen"
-                >
-                    Study courses
+                    (click)="isSkillsOpen = !isSkillsOpen">
+                    Skills
                 </button>
                 <div class="collapse-content">
-                    <label class="label">
-                        <span class="label-text sm:text-base">Advanced web technologies</span>
-                        <input type="checkbox" class="checkbox checkbox-accent" />
-                    </label>
-                    <label class="label">
-                        <span class="label-text sm:text-base">Intelligent learning environments</span>
-                        <input type="checkbox" class="checkbox checkbox-accent" />
+                    <label class="label" *ngFor="let option of skills">
+                        <span class="label-text sm:text-base">{{ option.displayName }}</span>
+                        <input
+                            type="checkbox"
+                            class="checkbox checkbox-accent"
+                            [name]="option.name"
+                            (input)="updateSkills($event)"
+                        />
                     </label>
                 </div>
             </div>
             <label>Tagline (Describe yourself in a few words)</label>
-            <input class="input input-bordered w-full mb-4" />
-            <label>Motivation (Provide a description of who you are looking for)</label>
-            <textarea class="textarea textarea-bordered w-full mb-4"></textarea>
-            <button class="btn btn-primary">Register</button>
-        </div>
+            <input
+                type="text"
+                name="desc"
+                [(ngModel)]="user.detail.desc_short"
+                class="input input-bordered w-full mb-4"
+            />
+            <label>Motivation (Provide a description of what you are looking for in a study buddy)</label>
+            <textarea
+                name="motivation"
+                [(ngModel)]="user.detail.motivation"
+                class="textarea textarea-bordered w-full mb-4">
+            </textarea>
+            <button
+                class="btn btn-primary"
+                (click)="tryRegister()">
+                Register
+            </button>
+            <ng-container *ngIf="(response$ | async) as response">
+                <span *ngIf="!response.isSuccess" class="text-error">Registering failed, please check, that you filled in all fields!</span>
+            </ng-container>
+        </form>
     </div>
     <div class="flex justify-end items-center">
         <span class="mr-2">Already have an account?</span>

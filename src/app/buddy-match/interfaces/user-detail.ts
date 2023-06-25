@@ -1,9 +1,9 @@
 export interface UserDetail {
-    firstName: string;
-    lastName: string;
-    shortDescription: string;
+    first_name: string;
+    second_name: string;
+    desc_short: string;
     motivation: string;
-    studyProgram: string;
-    attendedCourses: string[];
+    study_program: string;
+    attended_courses: string[];
     skills: string[];
 }

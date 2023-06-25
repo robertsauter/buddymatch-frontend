@@ -14,6 +14,7 @@ export class AccountService {
 
   user!: User;
   token!: string;
+  userId!: string;
 
   constructor(private http: HttpClient) {}
 
@@ -33,8 +34,9 @@ export class AccountService {
         this.token = response.rows.token;
         return { isSuccess: true };
       }),
-      catchError(() => {
-        return of({ isSuccess: false });
+      catchError((e) => {
+        console.log(e);
+        return of({ isSuccess: false })
       })
     );
   }
@@ -43,7 +45,15 @@ export class AccountService {
     window.localStorage.removeItem('email');
   }
 
-  register(user: User) {}
+  register(user: User): Observable<ResponseData<null>> {
+    return this.http.post<Response>(`${environment.baseUrl}/register`, user).pipe(
+      map((response) => {
+        this.userId = response.rows._id;
+        return { isSuccess: true };
+      }),
+      catchError(() => of({ isSuccess: false }))
+    );
+  }
 
   updateProfile(user: UserDetail) {}
 }
