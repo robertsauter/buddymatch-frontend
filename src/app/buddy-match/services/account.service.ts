@@ -12,7 +12,6 @@ import { Response } from '../interfaces/response';
 })
 export class AccountService {
 
-  user!: User;
   token!: string;
   userId!: string;
 
@@ -30,7 +29,7 @@ export class AccountService {
     return this.http.post<Response>(`${environment.baseUrl}/login`, { email, password }).pipe(
       map((response) => {
         window.localStorage.setItem('email', email);
-        this.user = response.rows.user;
+        this.userId = response.rows.userId;
         this.token = response.rows.token;
         return { isSuccess: true };
       }),
