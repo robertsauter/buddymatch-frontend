@@ -93,9 +93,7 @@
                 (click)="tryRegister()">
                 Register
             </button>
-            <ng-container *ngIf="(response$ | async) as response">
-                <span *ngIf="!response.isSuccess" class="text-error">Registering failed, please check, that you filled in all fields!</span>
-            </ng-container>
+            <span *ngIf="error" class="text-error">Registering failed, please check, that you filled in all fields!</span>
         </form>
     </div>
     <div class="flex justify-end items-center">

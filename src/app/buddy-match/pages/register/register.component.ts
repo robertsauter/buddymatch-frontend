@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { AccountService } from '../../services/account.service';
-import { Observable, first } from 'rxjs';
+import { first } from 'rxjs';
 import { Router } from '@angular/router';
-import { ResponseData } from '../../interfaces/responseData';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +10,7 @@ import { ResponseData } from '../../interfaces/responseData';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  response$!: Observable<ResponseData<null>>;
+  error: boolean = false;
 
   isStudyProgramsOpen = false;
   isStudyCoursesOpen = false;
@@ -91,11 +90,11 @@ export class RegisterComponent {
   }
 
   tryRegister() {
-    this.response$ = this.accountService.register(this.user);
-    this.response$.pipe(first()).subscribe((response) => {
-      if(response.isSuccess) {
-        this.router.navigate(['buddy-match/login']);
-      }
-    });
+    this.accountService.register(this.user)
+      .pipe(first())
+      .subscribe({
+          next: () => this.router.navigate(['/buddy-match/login']),
+          error: () => this.error = true
+      });
   }
 }

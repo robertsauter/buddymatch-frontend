@@ -17,10 +17,8 @@
                 required
                 class="input input-bordered w-full mb-4"
             />
-                <button (click)="tryLogin()" class="btn btn-primary">Login</button>
-            <ng-container *ngIf="(response$ | async) as response">
-                <span *ngIf="!response.isSuccess" class="text-error text-sm">Email or password could not be found, please try again!</span>
-            </ng-container>
+            <button (click)="tryLogin()" class="btn btn-primary">Login</button>
+            <span *ngIf="error" class="text-error text-sm">Email or password could not be found, please try again!</span>
         </form>
     </div>
     <div class="flex justify-end items-center">
