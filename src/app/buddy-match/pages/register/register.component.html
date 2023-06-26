@@ -31,7 +31,7 @@
             />
             <label>Study program</label>
             <select name="studyprogram" [(ngModel)]="user.detail.study_program" class="select select-bordered w-full mb-4">
-                <option *ngFor="let program of studyPrograms" value="program.name">{{ program.displayName }}</option>
+                <option *ngFor="let program of studyPrograms" [value]="program.name">{{ program.displayName }}</option>
             </select>
             <div
                 class="collapse collapse-plus mb-4"
