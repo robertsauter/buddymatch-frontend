@@ -3,8 +3,7 @@ import { UserDetail } from '../interfaces/user-detail';
 import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environment';
-import { Observable, catchError, map, of } from 'rxjs';
-import { ResponseData } from '../interfaces/responseData';
+import { Observable, map } from 'rxjs';
 import { Response } from '../interfaces/response';
 
 @Injectable({
@@ -25,17 +24,13 @@ export class AccountService {
     return false;
   }
 
-  login(email: string, password: string): Observable<ResponseData<null>> {
+  login(email: string, password: string): Observable<string> {
     return this.http.post<Response>(`${environment.baseUrl}/login`, { email, password }).pipe(
       map((response) => {
         window.localStorage.setItem('email', email);
         this.userId = response.rows.userId;
         this.token = response.rows.token;
-        return { isSuccess: true };
-      }),
-      catchError((e) => {
-        console.log(e);
-        return of({ isSuccess: false })
+        return response.rows.userId;
       })
     );
   }
@@ -44,13 +39,12 @@ export class AccountService {
     window.localStorage.removeItem('email');
   }
 
-  register(user: User): Observable<ResponseData<null>> {
+  register(user: User): Observable<string> {
     return this.http.post<Response>(`${environment.baseUrl}/register`, user).pipe(
       map((response) => {
         this.userId = response.rows._id;
-        return { isSuccess: true };
-      }),
-      catchError(() => of({ isSuccess: false }))
+        return response.rows._id;
+      })
     );
   }
 
