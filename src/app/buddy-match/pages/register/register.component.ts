@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   error: boolean = false;
 
-  isStudyProgramsOpen = false;
   isStudyCoursesOpen = false;
   isSkillsOpen = false;
 
