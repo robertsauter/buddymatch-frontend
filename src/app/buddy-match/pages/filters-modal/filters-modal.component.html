@@ -7,10 +7,10 @@
         class="collapse-title sm:text-lg text-left"
         (click)="isStudyFieldsOpen = !isStudyFieldsOpen"
     >
-        Study fields
+        Study program
     </button>
     <div class="collapse-content">
-        <label class="label" *ngFor="let option of filterOptions.studyFields">
+        <label class="label" *ngFor="let option of studyPrograms">
             <span class="label-text sm:text-base">{{ option.displayName }}</span>
             <input type="checkbox" class="checkbox checkbox-accent" [name]="option.name" />
         </label>

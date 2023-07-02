@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { filterOptions } from '../../data/filter-options';
 
 @Component({
   selector: 'app-filters-modal',
@@ -9,16 +10,7 @@ export class FiltersModalComponent {
   isStudyFieldsOpen = false;
   isStudyCoursesOpen = false;
 
-  filterOptions = {
-    studyFields: [
-      {
-        name: 'komedia',
-        displayName: 'Komedia',
-      },
-      {
-        name: 'info',
-        displayName: 'Informatik',
-      }
-    ]
-  };
+  studyPrograms = filterOptions.studyPrograms;
+  courses = filterOptions.courses;
+  skills = filterOptions.skills;
 }
