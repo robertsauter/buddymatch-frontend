@@ -17,19 +17,19 @@ export class ChatComponent implements OnInit {
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.selfName = window.localStorage.getItem('email') || '';
-    this.chatService.join(this.selfName);
+    this.selfName = window.localStorage.getItem('userId') || '';
+    this.chatService.connect('64a1a17d3bb2df85efa30d9a');
 
     this.route.paramMap.subscribe(params => {
-      this.partnerName = params.get('userid') || '';
+      this.partnerName = params.get('userId') || '';
     });
 
     this.chatService.receiveMessage().subscribe((response) => {
-      this.messages.push(response);
+      console.log(response);
     });
   }
 
   sendMessage() {
-    this.chatService.sendMessage(this.message);
+    this.chatService.sendMessage(this.message, this.selfName);
   }
 }
