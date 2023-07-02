@@ -9,27 +9,32 @@ import { ChatService } from '../../services/chat.service';
 })
 export class ChatComponent implements OnInit {
   partnerName: string = '';
-  selfName: string = '';
+  userId: string = '';
   message: string = '';
 
-  messages: { user: string, message: string }[] = [];
+  messages: { sender: string, content: string }[] = [];
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.selfName = window.localStorage.getItem('userId') || '';
-    this.chatService.connect('64a1a17d3bb2df85efa30d9a');
+    this.userId = window.localStorage.getItem('userId') || '';
 
     this.route.paramMap.subscribe(params => {
-      this.partnerName = params.get('userId') || '';
+      const chatId = params.get('chatId') || '';
+      this.chatService.connect(chatId);
     });
 
-    this.chatService.receiveMessage().subscribe((response) => {
-      console.log(response);
+    this.chatService.messageReceived$.subscribe((response) => {
+      this.messages.push({
+        sender: response.from,
+        content: response.content
+      });
     });
+
+    this.chatService.connected$.subscribe((response) => this.messages = response.messages);
   }
 
   sendMessage() {
-    this.chatService.sendMessage(this.message, this.selfName);
+    this.chatService.sendMessage(this.message, this.userId);
   }
 }

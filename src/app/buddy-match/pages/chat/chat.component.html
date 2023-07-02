@@ -15,11 +15,11 @@
     </div>
     <div class="flex-1 overflow-y-auto">
         <div *ngFor="let messageData of messages">
-            <div *ngIf="messageData.user !== selfName" class="chat chat-start">
-                <div class="chat-bubble">{{ messageData.message }}</div>
+            <div *ngIf="messageData.sender !== userId" class="chat chat-start">
+                <div class="chat-bubble chat-bubble-primary">{{ messageData.content }}</div>
             </div>
-            <div *ngIf="messageData.user === selfName" class="chat chat-end">
-                <div class="chat-bubble">{{ messageData.message }}</div>
+            <div *ngIf="messageData.sender === userId" class="chat chat-end">
+                <div class="chat-bubble chat-bubble-accent">{{ messageData.content }}</div>
             </div>
         </div>
     </div>

@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ChatService {
   chatId!: string;
+  connected$: Observable<any> = this.socket.fromEvent('connected');
+  messageReceived$: Observable<{ content: string, from: string }> = this.socket.fromEvent('private message');
 
   constructor(private socket: Socket) { }
 
@@ -22,10 +24,6 @@ export class ChatService {
       to: this.chatId,
       senderId: senderId
     });
-  }
-
-  receiveMessage(): Observable<{ user: string, message: string }> {
-    return this.socket.fromEvent('private message');
   }
 
   //Get all messages for a single chat between two participants
