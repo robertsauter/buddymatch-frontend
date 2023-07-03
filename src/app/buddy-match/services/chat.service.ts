@@ -6,20 +6,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatService {
+  chatId!: string;
+  connected$: Observable<any> = this.socket.fromEvent('connected');
+  messageReceived$: Observable<{ content: string, from: string }> = this.socket.fromEvent('private message');
 
   constructor(private socket: Socket) { }
 
-  join(name: string) {
-    console.log('Try join:', name)
-    this.socket.emit('user_join', name);
+  connect(chatId: string) {
+    this.chatId = chatId;
+    this.socket.ioSocket.io.opts.query = { chatId };
+    this.socket.connect();
   }
 
-  sendMessage(message: string) {
-    this.socket.emit('chat_message', message);
-  }
-
-  receiveMessage(): Observable<{ user: string, message: string }> {
-    return this.socket.fromEvent('chat_message');
+  sendMessage(message: string, senderId: string) {
+    this.socket.emit('private message', {
+      content: message,
+      to: this.chatId,
+      senderId: senderId
+    });
   }
 
   //Get all messages for a single chat between two participants

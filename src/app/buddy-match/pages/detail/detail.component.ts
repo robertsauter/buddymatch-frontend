@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit(): void {
-    const userId = this.route.snapshot.paramMap.get('userid');
+    const userId = this.route.snapshot.paramMap.get('userId');
     if(userId) {
       this.user$ = this.userService.getUserById(userId);
     }

@@ -10,6 +10,7 @@ import { MatchesComponent } from './pages/matches/matches.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { FirstLetterPipe } from './pipes/first-letter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegisterComponent } from './pages/register/register.component';
     MatchesComponent,
     ChatComponent,
     SettingsComponent,
-    RegisterComponent
+    RegisterComponent,
+    FirstLetterPipe
   ],
   imports: [
     CommonModule,

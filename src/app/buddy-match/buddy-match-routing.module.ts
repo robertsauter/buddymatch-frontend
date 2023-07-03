@@ -14,9 +14,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [isNotLoggedInGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [isNotLoggedInGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [isLoggedInGuard] },
-  { path: 'detail/:userid', component: DetailComponent, canActivate: [isLoggedInGuard] },
+  { path: 'detail/:userId', component: DetailComponent, canActivate: [isLoggedInGuard] },
   { path: 'matches', component: MatchesComponent, canActivate: [isLoggedInGuard] },
-  { path: 'chat/:userid', component: ChatComponent, canActivate: [isLoggedInGuard] }
+  { path: 'chat/:chatId', component: ChatComponent, canActivate: [isLoggedInGuard] }
 ];
 
 @NgModule({
