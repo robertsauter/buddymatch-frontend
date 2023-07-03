@@ -1,4 +1,4 @@
-<div class="main-container flex flex-col pt-24 px-4 pb-8 gap-8">
+<div *ngIf="user$ | async as user" class="main-container flex flex-col pt-24 px-4 pb-8 gap-8">
     <a routerLink="/buddy-match" class="btn w-fit">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -11,38 +11,34 @@
                 <img src="assets/images/user-placeholder.svg" />
             </div>
         </div>
-        <h2 class="text-3xl font-bold">Robert Sauter</h2>
+        <h2 class="text-3xl font-bold">{{ user.detail.first_name }} {{ user.detail.second_name }}</h2>
         <span class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
             </svg>
-            Funny guy.
+            {{ user.detail.desc_short }}
         </span>
         <span class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
             </svg>                  
-            Studies Komedia
+            Studies {{ user.detail.study_program }}
         </span>
     </div>
     <div>
         <h3 class="font-bold mb-2">Courses</h3>
         <div class="flex flex-wrap gap-1">
-            <div class="badge badge-neutral h-auto">Advanced Web Technologies</div>
-            <div class="badge badge-neutral h-auto">Seminar angewandte Kognitionspsychologie</div>
-            <div class="badge badge-neutral h-auto">Intelligent Learning Environments</div>
+            <div *ngFor="let course of user.detail.attended_courses" class="badge badge-neutral h-auto">{{ course }}</div>
         </div>
     </div>
     <div>
         <h3 class="font-bold mb-2">Skills</h3>
         <div class="flex flex-wrap gap-1">
-            <div class="badge badge-neutral h-auto">JavaScript</div>
-            <div class="badge badge-neutral h-auto">CSS</div>
-            <div class="badge badge-neutral h-auto">SPSS</div>
+            <div *ngFor="let skill of user.detail.skills" class="badge badge-neutral h-auto">{{ skill }}</div>
         </div>
     </div>
     <div>
         <h3 class="font-bold mb-2">Motivation</h3>
-        <p>Blablabla I like to study and other than that I'm totally boring.</p>
+        <p>{{ user.detail.motivation }}</p>
     </div>
 </div>

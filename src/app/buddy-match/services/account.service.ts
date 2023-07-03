@@ -28,6 +28,7 @@ export class AccountService {
     return this.http.post<Response>(`${environment.baseUrl}/login`, { email, password }).pipe(
       map((response) => {
         window.localStorage.setItem('userId', response.rows.userId);
+        window.localStorage.setItem('token', response.rows.token);
         this.userId = response.rows.userId;
         this.token = response.rows.token;
         return response.rows.userId;

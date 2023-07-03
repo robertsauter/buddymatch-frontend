@@ -1,43 +1,66 @@
 <div
     class="collapse collapse-plus"
-    [ngClass]="isStudyFieldsOpen ? 'collapse-open' : 'collapse-close'"
->
+    [ngClass]="isStudyFieldsOpen ? 'collapse-open' : 'collapse-close'">
     <button
         type="button"
         class="collapse-title sm:text-lg text-left"
-        (click)="isStudyFieldsOpen = !isStudyFieldsOpen"
-    >
-        Study fields
+        (click)="isStudyFieldsOpen = !isStudyFieldsOpen">
+        Study program
     </button>
     <div class="collapse-content">
-        <label class="label" *ngFor="let option of filterOptions.studyFields">
-            <span class="label-text sm:text-base">{{ option.displayName }}</span>
-            <input type="checkbox" class="checkbox checkbox-accent" [name]="option.name" />
+        <label class="label" *ngFor="let option of studyPrograms">
+            <span class="label-text sm:text-base">{{ option }}</span>
+            <input
+                (input)="updateSelectedFilters($event, 'programs')"
+                type="checkbox"
+                class="checkbox checkbox-accent"
+                [name]="option"
+            />
         </label>
     </div>
 </div>
 <div
     class="collapse collapse-plus"
-    [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'"
->
+    [ngClass]="isStudyCoursesOpen ? 'collapse-open' : 'collapse-close'">
     <button
         type="button"
         class="collapse-title sm:text-lg text-left"
-        (click)="isStudyCoursesOpen = !isStudyCoursesOpen"
-    >
+        (click)="isStudyCoursesOpen = !isStudyCoursesOpen">
         Study courses
     </button>
     <div class="collapse-content">
-        <label class="label">
-            <span class="label-text sm:text-base">Advanced web technologies</span>
-            <input type="checkbox" class="checkbox checkbox-accent" />
+        <label class="label" *ngFor="let option of courses">
+            <span class="label-text sm:text-base">{{ option }}</span>
+            <input
+                (input)="updateSelectedFilters($event, 'courses')"
+                type="checkbox"
+                class="checkbox checkbox-accent"
+                [name]="option"
+            />
         </label>
-        <label class="label">
-            <span class="label-text sm:text-base">Intelligent learning environments</span>
-            <input type="checkbox" class="checkbox checkbox-accent" />
+    </div>
+</div>
+<div
+    class="collapse collapse-plus"
+    [ngClass]="isSkillsOpen ? 'collapse-open' : 'collapse-close'">
+    <button
+        type="button"
+        class="collapse-title sm:text-lg text-left"
+        (click)="isSkillsOpen = !isSkillsOpen">
+        Skills
+    </button>
+    <div class="collapse-content">
+        <label class="label" *ngFor="let option of skills">
+            <span class="label-text sm:text-base">{{ option }}</span>
+            <input
+                (input)="updateSelectedFilters($event, 'skills')"
+                type="checkbox"
+                class="checkbox checkbox-accent"
+                [name]="option"
+            />
         </label>
     </div>
 </div>
 <div class="modal-action">
-    <button class="btn btn-accent sm:text-base">Save</button>
+    <button (click)="saveFilters()" class="btn btn-accent sm:text-base">Save</button>
 </div>

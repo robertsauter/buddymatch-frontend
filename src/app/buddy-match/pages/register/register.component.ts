@@ -3,6 +3,7 @@ import { User } from '../../interfaces/user';
 import { AccountService } from '../../services/account.service';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
+import { filterOptions } from '../../data/filter-options';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   error: boolean = false;
 
-  isStudyProgramsOpen = false;
   isStudyCoursesOpen = false;
   isSkillsOpen = false;
 
@@ -30,38 +30,9 @@ export class RegisterComponent {
     }
   };
 
-  studyPrograms = [
-    {
-      name: 'komedia',
-      displayName: 'Komedia',
-    },
-    {
-      name: 'info',
-      displayName: 'Computer science',
-    }
-  ];
-
-  courses = [
-    {
-      name: 'awt',
-      displayName: 'Advanced web technologies',
-    },
-    {
-      name: 'ile',
-      displayName: 'Intelligent learning environments',
-    }
-  ];
-
-  skills = [
-    {
-      name: 'js',
-      displayName: 'JavaScript'
-    },
-    {
-      name: 'python',
-      displayName: 'Python'
-    }
-  ];
+  studyPrograms = filterOptions.studyPrograms;
+  courses = filterOptions.courses;
+  skills = filterOptions.skills;
 
   constructor(private accountService: AccountService, private router: Router) {}
 
