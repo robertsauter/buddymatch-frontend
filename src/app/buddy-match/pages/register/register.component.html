@@ -31,7 +31,7 @@
             />
             <label>Study program</label>
             <select name="studyprogram" [(ngModel)]="user.detail.study_program" class="select select-bordered w-full mb-4">
-                <option *ngFor="let program of studyPrograms" [value]="program.name">{{ program.displayName }}</option>
+                <option *ngFor="let program of studyPrograms" [value]="program">{{ program }}</option>
             </select>
             <div
                 class="collapse collapse-plus mb-4"
@@ -44,11 +44,11 @@
                 </button>
                 <div class="collapse-content">
                     <label class="label" *ngFor="let option of courses">
-                        <span class="label-text sm:text-base">{{ option.displayName }}</span>
+                        <span class="label-text sm:text-base">{{ option }}</span>
                         <input
                             type="checkbox"
                             class="checkbox checkbox-accent"
-                            [name]="option.name"
+                            [name]="option"
                             (input)="updateCourses($event)"
                         />
                     </label>
@@ -65,11 +65,11 @@
                 </button>
                 <div class="collapse-content">
                     <label class="label" *ngFor="let option of skills">
-                        <span class="label-text sm:text-base">{{ option.displayName }}</span>
+                        <span class="label-text sm:text-base">{{ option }}</span>
                         <input
                             type="checkbox"
                             class="checkbox checkbox-accent"
-                            [name]="option.name"
+                            [name]="option"
                             (input)="updateSkills($event)"
                         />
                     </label>
