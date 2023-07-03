@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
-import { AccountService } from './services/account.service';
+import { AccountService } from './services/account.service'; // Agregado
 import { User } from './interfaces/user';
 
 @Component({
@@ -15,11 +15,16 @@ export class BuddyMatchComponent {
   currentUser: User | undefined;
   currentIndex: number = 0;
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private accountService: AccountService){}
 
   ngOnInit(): void {
-    //used dummy values in the params cause still don't know how to get the userId
-    this.userService.getUsers('userId', {filter1: 'value1', filter2: 'value2'}).subscribe(users => {
+    let id: string = "";
+
+    if (this.accountService.checkIfUserIsLoggedIn()) {
+      id = window.localStorage.getItem('userId') || "";  
+    }
+
+    this.userService.getUsers(id, {filter1: 'value1', filter2: 'value2'}).subscribe(users => {
       this.users = users;
       if (users.length > 0) {
         this.currentUser = users[0];
@@ -36,4 +41,3 @@ export class BuddyMatchComponent {
     }
   }
 }
-

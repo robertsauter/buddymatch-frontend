@@ -17,8 +17,8 @@ export class AccountService {
   constructor(private http: HttpClient) {}
 
   checkIfUserIsLoggedIn(): boolean {
-    const email = window.localStorage.getItem('email');
-    if(email) {
+    const userId = window.localStorage.getItem('userId');
+    if(userId) {
       return true;
     }
     return false;
@@ -27,7 +27,7 @@ export class AccountService {
   login(email: string, password: string): Observable<string> {
     return this.http.post<Response>(`${environment.baseUrl}/login`, { email, password }).pipe(
       map((response) => {
-        window.localStorage.setItem('email', email);
+        window.localStorage.setItem('userId', response.rows.userId);
         this.userId = response.rows.userId;
         this.token = response.rows.token;
         return response.rows.userId;
@@ -36,7 +36,7 @@ export class AccountService {
   }
 
   logout() {
-    window.localStorage.removeItem('email');
+    window.localStorage.removeItem('userId');
   }
 
   register(user: User): Observable<string> {
