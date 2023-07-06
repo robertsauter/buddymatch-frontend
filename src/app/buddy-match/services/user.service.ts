@@ -15,19 +15,7 @@ export class UserService {
   constructor(private http: HttpClient, private accountService: AccountService) { }
 
   getUserById(userId: string): Observable<User | null> {
-    const token = window.localStorage.getItem('token');
-    if(!token) {
-      this.accountService.logout();
-      return of(null);
-    }
-    return this.http.get<Response>(
-      `${environment.baseUrl}/profile/${userId}`,
-      {
-        headers: {
-          authorization: `Bearer ${ token }`
-        }
-      }
-    ).pipe(
+    return this.http.get<Response>(`${environment.baseUrl}/profile/${userId}`).pipe(
       map((response: Response) => response.rows.user),
       catchError((e: HttpErrorResponse) => {
         if(e.status === 403) {
@@ -39,19 +27,7 @@ export class UserService {
   }
 
   getMatches(userId: string): Observable<Observable<User | null>[] | null> {
-    const token = window.localStorage.getItem('token');
-    if(!token) {
-      this.accountService.logout();
-    }
-
-    return this.http.get<Response>(
-      `${environment.baseUrl}/match/acceptor/${userId}/list`,
-      {
-        headers: {
-          authorization: `Bearer ${ token }`
-        }
-      }
-    ).pipe(
+    return this.http.get<Response>(`${environment.baseUrl}/match/acceptor/${userId}/list`).pipe(
       map((response) => {
         const users: Observable<User | null>[] = [];
 

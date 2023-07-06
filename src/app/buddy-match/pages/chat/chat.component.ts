@@ -2,7 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild }
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 import { UserService } from '../../services/user.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { User } from '../../interfaces/user';
 
 @Component({
@@ -12,9 +12,12 @@ import { User } from '../../interfaces/user';
 })
 export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   chatPartner$!: Observable<User | null>;
+  messageReceivedSubscription$!: Subscription;
+  initialMessagesReceivedSubscription$!: Subscription;
+  routerSubscription$!: Subscription;
 
   @ViewChild('chatContainer') chatContainer!: ElementRef<HTMLDivElement>;
-
+  
   userId: string = '';
   message: string = '';
   messageReceived: boolean = true;
@@ -30,28 +33,30 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   ngOnInit(): void {
     this.userId = window.localStorage.getItem('userId') || '';
 
-    this.route.paramMap.subscribe(params => {
+    this.routerSubscription$ = this.route.paramMap.subscribe(params => {
       const chatId = params.get('chatId') || '';
       this.chatService.connect(chatId);
       this.chatService.getMessages(chatId);
     });
 
-    this.chatService.messageReceived$.subscribe((response) => {
-      this.messages.push({
-        sender: response.from,
-        content: response.content
+    this.messageReceivedSubscription$ = this.chatService.messageReceived$
+      .subscribe((response) => {
+        this.messages.push({
+          sender: response.from,
+          content: response.content
+        });
+        this.messageReceived = true;
       });
-      this.messageReceived = true;
-    });
 
     
-    this.chatService.initialMessagesReceived$.subscribe((response) => {
-      this.messages = response.messages;
+    this.initialMessagesReceivedSubscription$ = this.chatService.initialMessagesReceived$
+      .subscribe((response) => {
+        this.messages = response.messages;
 
-      const partnerId = response.participants.find((participant: string) => participant !== this.userId);
-      this.chatPartner$ = this.userService.getUserById(partnerId);
-      this.messageReceived = true;
-    });
+        const partnerId = response.participants.find((participant: string) => participant !== this.userId);
+        this.chatPartner$ = this.userService.getUserById(partnerId);
+        this.messageReceived = true;
+      });
   }
 
   ngAfterViewChecked(): void {
@@ -66,6 +71,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.routerSubscription$.unsubscribe();
+    this.initialMessagesReceivedSubscription$.unsubscribe();
+    this.messageReceivedSubscription$.unsubscribe();
     this.chatService.disconnect();
   }
 }
