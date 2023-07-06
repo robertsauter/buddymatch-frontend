@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { User } from '../../interfaces/user';
 
 @Component({
@@ -12,12 +12,32 @@ import { User } from '../../interfaces/user';
 export class DetailComponent implements OnInit {
   user$!: Observable<User | null>;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {}
+  userId!: string;
+  accept = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private router: Router) {}
 
   ngOnInit(): void {
-    const userId = this.route.snapshot.paramMap.get('userId');
+    const userId = this.route.snapshot.paramMap.get('userId');    
     if(userId) {
+      this.userId = userId;
       this.user$ = this.userService.getUserById(userId);
     }
+
+    const accept = this.route.snapshot.queryParamMap.get('accept');
+    this.accept = accept === 'true' ? true : false;
+  }
+
+  acceptMatch() {
+    const loggedUserId = window.localStorage.getItem('userId') || '';
+
+    this.userService.accept(loggedUserId, this.userId).pipe(first()).subscribe(isSuccess => {
+      if(isSuccess) {
+        this.router.navigate(['buddy-match/matches']);
+      }
+    });
   }
 }

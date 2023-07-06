@@ -7,22 +7,24 @@
     </a>
     <span class="font-bold mb-4">People who liked you</span>
     <div class="flex overflow-x-auto mb-8">
-        <a routerLink="/buddy-match" class="flex flex-col items-center mr-4">
-            <div class="avatar placeholder">
-                <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-                    <span class="text-2xl">R</span>
-                </div>
-            </div>
-            <span>Robert</span>
-        </a>
-        <a routerLink="/buddy-match" class="flex flex-col items-center mr-4">
-            <div class="avatar placeholder">
-                <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
-                    <span class="text-2xl">A</span>
-                </div>
-            </div>
-            <span>Arnold</span>
-        </a>
+        <ng-container *ngIf="matches$ | async as matches">
+            <ng-container *ngFor="let match$ of matches">
+                <ng-container *ngIf="match$ | async as match">
+                    <a
+                        [routerLink]="['/buddy-match/detail', match._id]"
+                        [queryParams]="{ accept: true }"
+                        class="flex flex-col items-center mr-4">
+                        <div class="avatar placeholder">
+                            <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
+                                <span class="text-2xl">{{ match.detail.first_name | firstLetter }}</span>
+                            </div>
+                        </div>
+                        <span>{{ match.detail.first_name }}</span>
+                    </a>
+                </ng-container>
+            </ng-container>
+            <span *ngIf="matches.length === 0">No pending matches found</span>
+        </ng-container>
     </div>
     <span class="font-bold mb-4">Messages</span>
     <div>
