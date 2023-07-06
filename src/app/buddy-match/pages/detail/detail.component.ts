@@ -34,9 +34,9 @@ export class DetailComponent implements OnInit {
   acceptMatch() {
     const loggedUserId = window.localStorage.getItem('userId') || '';
 
-    this.userService.accept(loggedUserId, this.userId).pipe(first()).subscribe(isSuccess => {
-      if(isSuccess) {
-        this.router.navigate(['buddy-match/matches']);
+    this.userService.accept(loggedUserId, this.userId).pipe(first()).subscribe(chatId => {
+      if(chatId) {
+        this.router.navigate(['buddy-match/chat', chatId]);
       }
     });
   }

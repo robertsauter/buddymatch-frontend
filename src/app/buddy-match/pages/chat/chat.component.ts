@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat.service';
 import { UserService } from '../../services/user.service';
@@ -10,7 +10,7 @@ import { User } from '../../interfaces/user';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   chatPartner$!: Observable<User | null>;
 
   @ViewChild('chatContainer') chatContainer!: ElementRef<HTMLDivElement>;
@@ -33,6 +33,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.route.paramMap.subscribe(params => {
       const chatId = params.get('chatId') || '';
       this.chatService.connect(chatId);
+      this.chatService.getMessages(chatId);
     });
 
     this.chatService.messageReceived$.subscribe((response) => {
@@ -43,7 +44,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.messageReceived = true;
     });
 
-    this.chatService.connected$.subscribe((response) => {
+    
+    this.chatService.initialMessagesReceived$.subscribe((response) => {
       this.messages = response.messages;
 
       const partnerId = response.participants.find((participant: string) => participant !== this.userId);
@@ -61,5 +63,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   sendMessage() {
     this.chatService.sendMessage(this.message, this.userId);
+  }
+
+  ngOnDestroy(): void {
+    this.chatService.disconnect();
   }
 }

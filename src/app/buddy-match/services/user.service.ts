@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'environment';
 import { Response } from '../interfaces/response';
 import { AccountService } from './account.service';
+import { Match } from '../interfaces/match';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +55,7 @@ export class UserService {
       map((response) => {
         const users: Observable<User | null>[] = [];
 
-        //Add match interface later to use here
-        response.rows.forEach((match: any) => {
+        response.rows.forEach((match: Match) => {
           if(!match.accepted) {
             users.push(this.getUserById(match.sender));
           }
@@ -71,7 +71,7 @@ export class UserService {
     );
   }
 
-  accept(acceptor: string, sender: string): Observable<boolean> {
+  accept(acceptor: string, sender: string): Observable<string | null> {
     const token = window.localStorage.getItem('token');
     if(!token) {
       this.accountService.logout();
@@ -86,12 +86,12 @@ export class UserService {
         }
       }
     ).pipe(
-      map((response) => true),
+      map((response) => response.rows.chat_id),
       catchError((e: HttpErrorResponse) => {
         if(e.status === 403) {
           this.accountService.logout();
         }
-        return of(false);
+        return of(null);
       })
     );
   }
