@@ -15,8 +15,7 @@ import { Chat } from '../interfaces/chat';
 export class ChatService {
   chatId!: string;
 
-  //Add message interface
-  initialMessagesReceived$: Observable<any> = this.socket.fromEvent('initial messages');
+  initialMessagesReceived$: Observable<Chat> = this.socket.fromEvent('initial messages');
   messageReceived$: Observable<{ content: string, from: string }> = this.socket.fromEvent('private message');
 
   constructor(

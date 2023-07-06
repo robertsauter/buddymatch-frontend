@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.messages = response.messages;
 
         const partnerId = response.participants.find((participant: string) => participant !== this.userId);
-        this.chatPartner$ = this.userService.getUserById(partnerId);
+        this.chatPartner$ = this.userService.getUserById(partnerId || '');
         this.messageReceived = true;
       });
   }
