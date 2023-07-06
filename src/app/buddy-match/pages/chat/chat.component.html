@@ -15,7 +15,7 @@
             <span class="font-bold">{{ chatPartner.detail.first_name }}</span>
         </ng-container>
     </div>
-    <div #chatContainer class="flex-1 overflow-y-auto">
+    <div #chatContainer class="flex-1 overflow-y-auto pb-2">
         <div *ngFor="let messageData of messages">
             <div *ngIf="messageData.sender !== userId" class="chat chat-start">
                 <div class="chat-bubble chat-bubble-primary">{{ messageData.content }}</div>

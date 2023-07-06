@@ -49,19 +49,7 @@ export class ChatService {
   }
 
   getChats(userId: string): Observable<{ chat: Chat; lastMessage: string; user$: Observable<User | null> }[] | null> {
-    const token = window.localStorage.getItem('token');
-    if(!token) {
-      this.accountService.logout();
-    }
-
-    return this.http.get<Response>(
-      `${environment.baseUrl}/list/chats/${userId}`,
-      {
-        headers: {
-          authorization: `Bearer ${ token }`
-        }
-      }
-    ).pipe(
+    return this.http.get<Response>(`${environment.baseUrl}/list/chats/${userId}`).pipe(
       map((response) => {
         const chats: { chat: Chat; lastMessage: string; user$: Observable<User | null> }[] = [];
 
