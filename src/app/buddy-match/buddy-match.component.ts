@@ -33,6 +33,8 @@ export class BuddyMatchComponent {
     const id = this.accountService.userId$.value;
     this.userService.getUsers(id, filters).pipe(first()).subscribe((users) => {
       this.users = users;
+      this.currentIndex = 0;
+
       if (users.length > 0) {
         this.currentUser = users[0];
       }
