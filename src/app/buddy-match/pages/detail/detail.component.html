@@ -41,4 +41,11 @@
         <h3 class="font-bold mb-2">Motivation</h3>
         <p>{{ user.detail.motivation }}</p>
     </div>
+    <button
+        (click)="acceptMatch()"
+        *ngIf="accept"
+        type="button"
+        class="btn btn-success mt-4">
+        Accept
+    </button>
 </div>
