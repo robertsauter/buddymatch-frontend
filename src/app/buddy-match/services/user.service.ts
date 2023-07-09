@@ -112,7 +112,7 @@ export class UserService {
     }
     //Adds all the courses in one string separated by ,
     if(filters.courses.length > 0){
-      httpParams = httpParams.set('courses', filters.courses.join(','));
+      httpParams = httpParams.set('attended_courses', filters.courses.join(','));
     }
 
     //Adds all the skills in one string separated by ,
