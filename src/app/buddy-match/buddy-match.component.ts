@@ -21,11 +21,7 @@ export class BuddyMatchComponent {
   
 
   ngOnInit(): void {
-    let id: string = "";
-
-    if (this.accountService.checkIfUserIsLoggedIn()) {
-      id = window.localStorage.getItem('userId') || "";
-    }
+    const id = this.accountService.userId$.value;
 
     this.filtersModal.filtersSaved.subscribe(filters => {
       this.userService.getUsers(id, filters).subscribe(users => {
