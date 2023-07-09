@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, filter, map, of } from 'rxjs';
 import { User } from '../interfaces/user';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'environment';
@@ -11,6 +11,7 @@ import { AccountService } from './account.service';
 })
 export class UserService {
   private baseUrl = `${environment.baseUrl}/:id/list`; // Base URL to get the list of users
+  //baseUrl/userId/list/?study_program=Program1,Program2&
 
   constructor(private http: HttpClient, private accountService: AccountService) { }
 
@@ -39,14 +40,25 @@ export class UserService {
   }
 
   //Get all users, that match the given filter options. Should get the filters as input parameter
-  getUsers(userId: string, filters: any): Observable<User[]> { 
+  getUsers(userId: string, filters: {studyPrograms: string[], courses: string[], skills: string[]}): Observable<User[]> {
+    
     let httpParams = new HttpParams();
-    Object.keys(filters).forEach(key => {
-      httpParams = httpParams.set(key, filters[key]);
-    });
 
-    return this.http.get<User[]>(`${this.baseUrl.replace(':id', userId)}`, { params: httpParams });
+  
+    //Adds all the study programs in one string separated by ,
+    if(filters.studyPrograms.length > 0){
+      httpParams = httpParams.set('study_programs', filters.studyPrograms.join(','));
+    }
+    //Adds all the courses in one string separated by ,
+    if(filters.courses.length > 0){
+      httpParams = httpParams.set('courses', filters.courses.join(','));
+    }
+
+    //Adds all the skills in one string separated by ,
+    if(filters.skills.length > 0){
+      httpParams = httpParams.set('skills', filters.skills.join(','));
+    }
+
+    return this.http.get<User[]>(`${this.baseUrl.replace(`:id`, userId)}`, {params: httpParams});
   }
-
-
-  }
+}
