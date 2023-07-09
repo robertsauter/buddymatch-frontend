@@ -108,7 +108,7 @@ export class UserService {
   
     //Adds all the study programs in one string separated by ,
     if(filters.studyPrograms.length > 0){
-      httpParams = httpParams.set('study_programs', filters.studyPrograms.join(','));
+      httpParams = httpParams.set('study_program', filters.studyPrograms.join(','));
     }
     //Adds all the courses in one string separated by ,
     if(filters.courses.length > 0){
