@@ -74,8 +74,34 @@ export class UserService {
     );
   }
 
+  match(sender: string, acceptor: string): Observable<boolean> {
+    return this.http.post(
+      `${environment.baseUrl}/match`,
+      { sender, acceptor }
+    ).pipe(
+      map(response => true),
+      catchError((e: HttpErrorResponse) => {
+        if(e.status === 403) {
+          this.accountService.logout();
+        }
+        return of(false);
+      })
+    );
+  }
+
   //Get all users, that match the given filter options. Should get the filters as input parameter
-  getUsers(userId: string, filters: {studyPrograms: string[], courses: string[], skills: string[]}): Observable<User[]> {
+  getUsers(
+    userId: string,
+    filters: {
+      studyPrograms: string[],
+      courses: string[],
+      skills: string[]
+    } = {
+      studyPrograms: [],
+      courses: [],
+      skills: []
+    }
+  ): Observable<User[]> {
     
     let httpParams = new HttpParams();
 
@@ -94,6 +120,8 @@ export class UserService {
       httpParams = httpParams.set('skills', filters.skills.join(','));
     }
 
-    return this.http.get<User[]>(`${this.baseUrl.replace(`:id`, userId)}`, {params: httpParams});
+    return this.http.get<Response>(`${this.baseUrl.replace(`:id`, userId)}`, {params: httpParams}).pipe(
+      map((response) => response.rows)
+    );
   }
 }

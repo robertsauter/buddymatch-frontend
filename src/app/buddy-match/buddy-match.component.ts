@@ -3,6 +3,7 @@ import { UserService } from './services/user.service';
 import { AccountService } from './services/account.service'; 
 import { User } from './interfaces/user';
 import { FiltersModalComponent } from './pages/filters-modal/filters-modal.component';
+import { first } from 'rxjs';
 
 
 @Component({
@@ -21,15 +22,29 @@ export class BuddyMatchComponent {
   
 
   ngOnInit(): void {
-    const id = this.accountService.userId$.value;
+    this.loadUsers();
+  }
 
-    this.filtersModal.filtersSaved.subscribe(filters => {
-      this.userService.getUsers(id, filters).subscribe(users => {
-        this.users = users;
-        if (users.length > 0) {
-          this.currentUser = users[0];
-        }
-      });
+  loadUsers(filters?: {
+    studyPrograms: string[],
+    courses: string[],
+    skills: string[]
+  }) {
+    const id = this.accountService.userId$.value;
+    this.userService.getUsers(id, filters).pipe(first()).subscribe((users) => {
+      this.users = users;
+      if (users.length > 0) {
+        this.currentUser = users[0];
+      }
+    });
+  }
+
+  match() {
+    const sender = this.accountService.userId$.value;
+    this.userService.match(sender, this.currentUser?._id || '').pipe(first()).subscribe((isSuccess) => {
+      if(isSuccess) {
+        this.nextUser();
+      }
     });
   }
 

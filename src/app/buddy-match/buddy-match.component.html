@@ -90,7 +90,7 @@
     </div>
     <div class="card-body pt-0 flex-none w-full">
       <div class="divider my-2"></div>
-      <a routerLink="detail" class="btn btn-primary sm:text-base">See more</a>
+      <a [routerLink]="['detail', currentUser?._id]" class="btn btn-primary sm:text-base">See more</a>
     </div>
   </div>
   <div class="flex items-center justify-around py-4">
@@ -113,7 +113,7 @@
     <button
       type="button"
       class="btn btn-circle btn-success"
-      (click)="nextUser()"
+      (click)="match()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -150,6 +150,6 @@
         />
       </svg>
     </button>
-    <app-filters-modal></app-filters-modal>
+    <app-filters-modal (filtersSaved)="loadUsers($event)"></app-filters-modal>
   </form>
 </dialog>

@@ -50,15 +50,9 @@ export class FiltersModalComponent {
         ? [...this.selectedSkills, name]
         : this.selectedSkills.filter(skill => skill !== name);
     }
-
-    this.emitFilters();
   }
 
   saveFilters() {
-    this.emitFilters();
-  }
-
-  private emitFilters(){
     this.filtersSaved.emit({
       studyPrograms: this.selectedPrograms,
       courses: this.selectedCourses,
