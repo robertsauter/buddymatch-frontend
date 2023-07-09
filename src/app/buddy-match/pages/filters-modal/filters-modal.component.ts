@@ -8,8 +8,8 @@ import { filterOptions } from '../../data/filter-options';
 })
 export class FiltersModalComponent {
   @Output() filtersSaved = new EventEmitter<{
-    study_programs: string[],
-    attended_courses: string[],
+    studyPrograms: string[],
+    courses: string[],
     skills: string[]
   }>();
 
@@ -54,8 +54,8 @@ export class FiltersModalComponent {
 
   saveFilters() {
     this.filtersSaved.emit({
-      study_programs: this.selectedPrograms,
-      attended_courses: this.selectedCourses,
+      studyPrograms: this.selectedPrograms,
+      courses: this.selectedCourses,
       skills: this.selectedSkills
     });
   }
