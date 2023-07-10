@@ -6,11 +6,11 @@
         Back
     </a>
     <div>
-        <div class="avatar">
-            <div class="w-12 rounded-full">
-                <img src="assets/images/user-placeholder.svg" />
+        <div class="avatar placeholder">
+            <div class="bg-neutral-focus text-neutral-content rounded-full w-12">
+                <span class="text-2xl">{{ user.detail.first_name | firstLetter }}</span>
             </div>
-        </div>
+          </div>
         <h2 class="text-3xl font-bold">{{ user.detail.first_name }} {{ user.detail.second_name }}</h2>
         <span class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-1">
