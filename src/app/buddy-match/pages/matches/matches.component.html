@@ -5,7 +5,7 @@
         </svg>
         Back
     </a>
-    <span class="font-bold mb-4">People who liked you</span>
+    <span class="font-bold mb-4">People who want to connect with you</span>
     <div class="flex overflow-x-auto mb-8">
         <ng-container *ngIf="matches$ | async as matches">
             <ng-container *ngFor="let match$ of matches">
@@ -23,7 +23,7 @@
                     </a>
                 </ng-container>
             </ng-container>
-            <span *ngIf="matches.length === 0">No pending matches found</span>
+            <span *ngIf="matches.length === 0">No pending requests found</span>
         </ng-container>
     </div>
     <span class="font-bold mb-4">Messages</span>
@@ -44,6 +44,7 @@
                     </a>
                 </ng-container>
             </ng-container>
+            <span *ngIf="responseData.length === 0">You don't have any chats yet</span>
         </ng-container>
     </div>
 </div>
