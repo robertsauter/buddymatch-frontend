@@ -14,9 +14,4 @@ export class NavbarComponent {
   constructor(private accountService: AccountService, private router: Router) {
     this.userId$ = this.accountService.userId$;
   }
-
-  logout() {
-    this.accountService.logout();
-    this.router.navigate(['/buddy-match/login']);
-  }
 }

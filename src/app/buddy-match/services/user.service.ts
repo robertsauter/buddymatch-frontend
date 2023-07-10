@@ -6,6 +6,7 @@ import { environment } from 'environment';
 import { Response } from '../interfaces/response';
 import { AccountService } from './account.service';
 import { Match } from '../interfaces/match';
+import { UserDetail } from '../interfaces/user-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,21 @@ export class UserService {
   //baseUrl/userId/list/?study_program=Program1,Program2&
 
   constructor(private http: HttpClient, private accountService: AccountService) { }
+
+  updateUser(userId: string, detail: UserDetail): Observable<User | null> {
+    return this.http.post<Response>(
+      `${environment.baseUrl}/profile/${userId}`,
+      { userId, detail }
+    ).pipe(
+      map((response: Response) => response.rows.user),
+      catchError((e: HttpErrorResponse) => {
+        if(e.status === 403) {
+          this.accountService.logout();
+        }
+        return of(null);
+      })
+    );
+  }
 
   getUserById(userId: string): Observable<User | null> {
     return this.http.get<Response>(`${environment.baseUrl}/profile/${userId}`).pipe(

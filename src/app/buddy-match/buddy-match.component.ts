@@ -17,26 +17,43 @@ export class BuddyMatchComponent {
   users: User[] = [];
   currentUser: User | undefined;
   currentIndex: number = 0;
+  successMessageShown = false;
+  noMoreUsersMessageShown = false;
 
   constructor(private userService: UserService, private accountService: AccountService){}
   
 
   ngOnInit(): void {
-    this.loadUsers();
+    const lastUser = window.sessionStorage.getItem('lastUser') || '';
+    this.loadUsers({ lastUser });
   }
 
-  loadUsers(filters?: {
-    studyPrograms: string[],
-    courses: string[],
-    skills: string[]
+  showSuccessMessage() {
+    this.successMessageShown = true;
+    setTimeout(() => this.successMessageShown = false, 1500);
+  }
+
+  showNoMoreUsersMessage() {
+    this.noMoreUsersMessageShown = true;
+    setTimeout(() => this.noMoreUsersMessageShown = false, 1500);
+  }
+
+  loadUsers(params: {
+    filters?: {
+      studyPrograms: string[],
+      courses: string[],
+      skills: string[]
+    },
+    lastUser?: string
   }) {
     const id = this.accountService.userId$.value;
-    this.userService.getUsers(id, filters).pipe(first()).subscribe((users) => {
+    this.userService.getUsers(id, params.filters).pipe(first()).subscribe((users) => {
       this.users = users;
-      this.currentIndex = 0;
+      const lastUserIndex = this.users.findIndex((user) => user._id === params.lastUser);
+      this.currentIndex = lastUserIndex && lastUserIndex !== -1 ? lastUserIndex : 0;
 
       if (users.length > 0) {
-        this.currentUser = users[0];
+        this.currentUser = users[this.currentIndex];
       }
     });
   }
@@ -45,6 +62,7 @@ export class BuddyMatchComponent {
     const sender = this.accountService.userId$.value;
     this.userService.match(sender, this.currentUser?._id || '').pipe(first()).subscribe((isSuccess) => {
       if(isSuccess) {
+        this.showSuccessMessage();
         this.nextUser();
       }
     });
@@ -54,8 +72,11 @@ export class BuddyMatchComponent {
     this.currentIndex++;
     if (this.currentIndex < this.users.length) {
       this.currentUser = this.users[this.currentIndex];
+      window.sessionStorage.setItem('lastUser', this.currentUser._id || '');
     } else {
-      //What to do when there is no more users
+      this.showNoMoreUsersMessage();
+      this.currentIndex = 0;
+      this.currentUser = this.users[this.currentIndex];
     }
   }
 }
