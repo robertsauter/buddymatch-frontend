@@ -17,6 +17,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private accountService: AccountService) { }
 
+  // Send call to backend, to update the user information
   updateUser(userId: string, detail: UserDetail): Observable<User | null> {
     return this.http.post<Response>(
       `${environment.baseUrl}/profile/${userId}`,
@@ -44,11 +45,13 @@ export class UserService {
     );
   }
 
+  // Fetches all the matches, that a user got
   getMatches(userId: string): Observable<Observable<User | null>[] | null> {
     return this.http.get<Response>(`${environment.baseUrl}/match/acceptor/${userId}/list`).pipe(
       map((response) => {
         const users: Observable<User | null>[] = [];
 
+        // Since the matches objects do not contain the usernames, we have to make additional calls to the backend, to get the users, who sent the matches
         response.rows.forEach((match: Match) => {
           if(!match.accepted) {
             users.push(this.getUserById(match.sender));
@@ -66,19 +69,9 @@ export class UserService {
   }
 
   accept(acceptor: string, sender: string): Observable<string | null> {
-    const token = window.localStorage.getItem('token');
-    if(!token) {
-      this.accountService.logout();
-    }
-
     return this.http.post<Response>(
       `${environment.baseUrl}/match/${acceptor}/accept/${sender}`,
-      {},
-      {
-        headers: {
-          authorization: `Bearer ${ token }`
-        }
-      }
+      {}
     ).pipe(
       map((response) => response.rows.chat_id),
       catchError((e: HttpErrorResponse) => {

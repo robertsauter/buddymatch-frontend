@@ -47,6 +47,7 @@ export class SettingsComponent implements AfterViewInit {
     });
   }
 
+  // Send request to the backend to update the user
   updateUser() {
     this.userService.updateUser(this.accountService.userId$.value, this.user.detail).pipe(first()).subscribe((user) => {
       if(user) {

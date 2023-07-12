@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+// Returns the first character of a string
 @Pipe({
   name: 'firstLetter'
 })

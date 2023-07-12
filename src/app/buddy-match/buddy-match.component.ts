@@ -28,11 +28,13 @@ export class BuddyMatchComponent {
     this.loadUsers({ lastUser });
   }
 
+  // Show a message, to indicate, that the matching was successful 
   showSuccessMessage() {
     this.successMessageShown = true;
     setTimeout(() => this.successMessageShown = false, 1500);
   }
 
+  // Show a message, to indicate, that all users were seen
   showNoMoreUsersMessage() {
     this.noMoreUsersMessageShown = true;
     setTimeout(() => this.noMoreUsersMessageShown = false, 1500);

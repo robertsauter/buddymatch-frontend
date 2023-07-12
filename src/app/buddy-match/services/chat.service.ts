@@ -15,7 +15,9 @@ import { Chat } from '../interfaces/chat';
 export class ChatService {
   chatId!: string;
 
+  // This emits values, when the previous messages are sent from the backend
   initialMessagesReceived$: Observable<Chat> = this.socket.fromEvent('initial messages');
+  // This emits a value, every time a new message is sent from the backend to the client
   messageReceived$: Observable<{ content: string, from: string }> = this.socket.fromEvent('private message');
 
   constructor(
@@ -25,6 +27,7 @@ export class ChatService {
     private userService: UserService
   ) { }
 
+  // Connect to websocket with cahtid
   connect(chatId: string) {
     this.chatId = chatId;
     this.socket.ioSocket.io.opts.query = { chatId };
@@ -35,6 +38,7 @@ export class ChatService {
     this.socket.disconnect();
   }
 
+  // Get all previous messages
   getMessages(chatId: string) {
     this.socket.emit('initial messages', chatId);
   }
@@ -47,11 +51,13 @@ export class ChatService {
     });
   }
 
+  // Gets all chats of a given user
   getChats(userId: string): Observable<{ chat: Chat; lastMessage: string; user$: Observable<User | null> }[] | null> {
     return this.http.get<Response>(`${environment.baseUrl}/list/chats/${userId}`).pipe(
       map((response) => {
         const chats: { chat: Chat; lastMessage: string; user$: Observable<User | null> }[] = [];
 
+        // Since the chat objects do not contain the usernames, we have to make additional calls to the backend, to get the partner user for each chat
         response.rows.forEach((chat: Chat) => {
           const partnerId = chat.participants.find((id: string) => id !== userId) || '';
           const user$ = this.userService.getUserById(partnerId);
