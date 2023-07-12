@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="https://github.com/robertsauter/buddymatch-frontend/blob/louisborn-readme/buddymatch-logo.png" alt="Logo" width="50%" height="50%">
+    <img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/buddymatch-logo.png" alt="Logo" width="50%" height="50%">
   </a>
 
 <h3 align="center">BuddyMatch</h3>
@@ -63,7 +63,7 @@ For libraries used in the backend refere to our [buddymatch-api repository](http
 
 
 ### Architecture
-<img src="https://github.com/robertsauter/buddymatch-frontend/blob/louisborn-readme/buddymatch-architecture.png" alt="architecture" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/buddymatch-architecture.png" alt="architecture" width="100%" height="100%">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -107,7 +107,10 @@ For libraries used in the backend refere to our [buddymatch-api repository](http
 <!-- USAGE EXAMPLES -->
 ## Screenshots
 
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_dashboard.PNG" alt="dashboard" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/screenshot1.png" alt="dashboard" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/screenshot2.png" alt="dashboard" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/screenshot3.png" alt="dashboard" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/screenshot4.png" alt="dashboard" width="100%" height="100%">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
