@@ -63,7 +63,7 @@ For libraries used in the backend refere to our [buddymatch-api repository](http
 
 
 ### Architecture
-<img src="https://github.com/louisborn/questup-frontend/blob/main/architecture.PNG" alt="architecture" width="100%" height="100%">
+<img src="https://github.com/robertsauter/buddymatch-frontend/blob/louisborn-readme/buddymatch-architecture.png" alt="architecture" width="100%" height="100%">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
