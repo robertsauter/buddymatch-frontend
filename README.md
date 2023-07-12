@@ -90,7 +90,7 @@ For libraries used in the backend refere to our [buddymatch-api repository](http
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/louisborn/questup-frontend.git
+   git clone https://github.com/robertsauter/buddymatch-frontend.git
    ```
 2. Install NPM packages
    ```sh
@@ -108,11 +108,6 @@ For libraries used in the backend refere to our [buddymatch-api repository](http
 ## Screenshots
 
 <img src="https://github.com/louisborn/questup-frontend/blob/main/questup_dashboard.PNG" alt="dashboard" width="100%" height="100%">
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_quest.PNG" alt="quest" width="100%" height="100%">
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_store.PNG" alt="store" width="100%" height="100%">
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_scores.PNG" alt="scores" width="100%" height="100%">
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_lvl_calc.PNG" alt="level calc" width="100%" height="100%">
-<img src="https://github.com/louisborn/questup-frontend/blob/main/questup_lvl_result.PNG" alt="level result" width="100%" height="100%">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
