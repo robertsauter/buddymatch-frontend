@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AccountService } from 'src/app/buddy-match/services/account.service';
 
@@ -11,7 +10,7 @@ import { AccountService } from 'src/app/buddy-match/services/account.service';
 export class NavbarComponent {
   userId$: BehaviorSubject<string>;
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(private accountService: AccountService) {
     this.userId$ = this.accountService.userId$;
   }
 }

@@ -33,6 +33,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
   ngOnInit(): void {
     this.userId = window.localStorage.getItem('userId') || '';
 
+    // Get the chatId from the route parameters and then connect to websocket with this id
     this.routerSubscription$ = this.route.paramMap.subscribe(params => {
       const chatId = params.get('chatId') || '';
       this.chatService.connect(chatId);
@@ -47,18 +48,19 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
         });
         this.messageReceived = true;
       });
-
     
     this.initialMessagesReceivedSubscription$ = this.chatService.initialMessagesReceived$
       .subscribe((response) => {
         this.messages = response.messages;
 
+        // Get the chatPartner from the loaded chat
         const partnerId = response.participants.find((participant: string) => participant !== this.userId);
         this.chatPartner$ = this.userService.getUserById(partnerId || '');
         this.messageReceived = true;
       });
   }
 
+  // Scroll to bottom of chatwindow, every time a message was received
   ngAfterViewChecked(): void {
     if(this.messageReceived) {
       this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;

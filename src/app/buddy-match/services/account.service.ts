@@ -11,6 +11,8 @@ import { Response } from '../interfaces/response';
 })
 export class AccountService {
 
+  // The value of these BehaviorSubjects can be accessed from anywhere inside of the application
+  // Or they can be subscribed to, to react, when a new value is sent
   userId$ = new BehaviorSubject<string>(window.localStorage.getItem('userId') || '');
   token$ = new BehaviorSubject<string>(window.localStorage.getItem('token') || '');
 

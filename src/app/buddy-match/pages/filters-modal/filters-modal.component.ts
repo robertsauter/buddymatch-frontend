@@ -25,6 +25,7 @@ export class FiltersModalComponent {
   selectedCourses: string[] = [];
   selectedSkills: string[] = [];
 
+  // Update the arrays of filters, every time a checkbox is clicked
   updateSelectedFilters(
     event: Event,
     filterType: 'programs' | 'courses' | 'skills'
