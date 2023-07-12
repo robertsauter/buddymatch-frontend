@@ -48,7 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About the Project
 
-QuestUP is a web application to motivate middle school students to engage with learning materials even after the school time. The final subject grade (displayed to the students as a level) is predicted using ML techniques based on the students performance. By completing "Quests" students can receive points. With sufficient points, shop items are automatically unlocked which then can be purchased by the students. 
+BuddyMatch is a web application for students to find matching study buddies. The application idea is based on Tinder with focus on finding learning or university buddies. Students can register for an account and create a profile with information about their skills, study courses, study field and more. Other users are suggested and can be either accepted or denied by the logged in user. Suggested users can also be filtered to find more appropriate study buddies.
 
 This project was submited as a final project for Advanced Web Tech course under [Social Computing department](https://www.uni-due.de/soco/) at [Duisburg-Essen University](https://www.uni-due.de).
 
