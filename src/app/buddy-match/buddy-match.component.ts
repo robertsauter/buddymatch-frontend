@@ -74,11 +74,11 @@ export class BuddyMatchComponent {
     this.currentIndex++;
     if (this.currentIndex < this.users.length) {
       this.currentUser = this.users[this.currentIndex];
-      window.sessionStorage.setItem('lastUser', this.currentUser._id || '');
     } else {
       this.showNoMoreUsersMessage();
       this.currentIndex = 0;
       this.currentUser = this.users[this.currentIndex];
     }
+    window.sessionStorage.setItem('lastUser', this.currentUser._id || '');
   }
 }
