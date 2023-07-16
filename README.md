@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div id="readme-top" align="center">
   <a href="https://github.com/github_username/repo_name">
     <img src="https://github.com/robertsauter/buddymatch-frontend/blob/main/readme-images/buddymatch-logo.png" alt="Logo" width="50%" height="50%">
   </a>
