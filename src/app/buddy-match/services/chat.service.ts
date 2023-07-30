@@ -27,7 +27,7 @@ export class ChatService {
     private userService: UserService
   ) { }
 
-  // Connect to websocket with cahtid
+  // Connect to websocket with chatid
   connect(chatId: string) {
     this.chatId = chatId;
     this.socket.ioSocket.io.opts.query = { chatId };
