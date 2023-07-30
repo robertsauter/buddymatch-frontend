@@ -8,7 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AuthInterceptor } from './buddy-match/auth/auth.interceptor';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: { autoConnect: false } };
+const config: SocketIoConfig = { url: 'https://buddymatch-api.onrender.com', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [
