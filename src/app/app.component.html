@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div *ngIf="moduleLoading" class="h-screen flex justify-center items-center w-full flex-col">
+    <span class="loading loading-spinner loading-lg mb-4"></span>
+    <span>buddymatch is loading. This may take a few seconds!</span>
+</div>
+<router-outlet *ngIf="!moduleLoading"></router-outlet>
